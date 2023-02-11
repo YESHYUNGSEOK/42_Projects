@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   congression.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:05:56 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/11 17:49:09 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/12 00:07:10 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,36 @@
 
 void	*callup(void *data)
 {
-	t_table			*table;
-	int				cur;
-	int				next;
+	t_philos		*philos;
 
-	table = (t_table *)data;
-	set_id(table, &cur, &next);
-	while (philo_is_alive())
+	philos = (t_philos *)data;
+	while (philo_is_alive() && philo_is_full(philos))
 	{
-		if (table->philos[cur].status == WAITING)
-			start_eating(table, cur, next);
-		else if (table->philos[cur].status == EATING)
-			start_sleeping(table, cur);
-		else if (table->philos[cur].status == SLEEPING)
-			start_thinking(table, cur);
+		if (philos->status == WAITING)
+			start_eating(philos, philos->left, philos->right);
+		if (philos->status == EATING)
+			start_sleeping(philos, philos->left);
+		if (philos->status == SLEEPING)
+			start_thinking(philos, philos->left);
 	}
 	return (NULL);
 }
 
-void	congression(t_table *table)
+void	congression(t_table *table, t_philos *philos)
 {
 	static int	i;
 	
 	while (i < table->num_of_philos)
 	{
-		table->id = i;
-		pthread_create(&table->philos[i].philo, NULL, callup, (void *)table);
-		i++;
+		pthread_create(&philos[i].philo, NULL, callup, &philos[i]);
+		i = i + 2;
 		sleep(1);
 	}
+	i = 1;
+	while (i < table->num_of_philos)
+	{
+		pthread_create(&philos[i].philo, NULL, callup, &philos[i]);
+		i = i + 2;
+		sleep(1);
+	}	
 }

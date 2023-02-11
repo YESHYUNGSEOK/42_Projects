@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:01:15 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/11 17:23:15 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:45:04 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,44 @@ void	args_init(t_table *table, int ac, char **av)
 		if (table->must_eat <= 0)
 			err_msg("error: invalid arguments");
 	}
+	else
+		table->must_eat = -1;
 }
 
 void	table_init(t_table *table)
 {
 	static int	i;
+	int			tmp;
 
-	table->philos = malloc(sizeof(t_philos) * table->num_of_philos);
-	if (!table->philos)
-		err_msg("error: memory allocation failure");
-	table->forks = malloc(sizeof(t_forks) * table->num_of_philos);
+	tmp = table->num_of_philos;
+	table->forks = malloc(sizeof(t_forks *) * table->num_of_philos);
 	if (!table->forks)
 		err_msg("error: memory allocation failure");
 	while (i < table->num_of_philos)
 	{
-		pthread_mutex_init(&table->forks[i].fork, NULL);
-		table->forks[i].status = UNUSED;
-		table->philos[i].status = WAITING;
-		table->philos[i].fork_cnt = 0;
+		if (pthread_mutex_init(&table->forks[i].fork, NULL))
+			err_msg("error: mutex initialize failure");
+		i++;
+	}
+	table->num_of_philos = tmp;
+}
+
+void	philos_init(t_table *table, t_philos *philos)
+{
+	static int	i;
+
+	while (i < table->num_of_philos)
+	{
+		set_fork_cursor(&philos[i].left, &philos[i].right, i, table->num_of_philos);
+		philos[i].status = WAITING;
+		philos[i].fork_cnt = 0;
+		if (table->must_eat > 0)
+			philos[i].must_eat = 0;
+		else
+			philos[i].must_eat = -1;
+		philos[i].table = table;
+		if (!philos[i].table)
+			err_msg("error: memory allocation failure");
 		i++;
 	}
 }
