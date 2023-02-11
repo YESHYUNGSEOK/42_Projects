@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sanan <sanan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 11:15:53 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/10 21:24:32 by hyungseok        ###   ########.fr       */
+/*   Created: 2022/11/07 14:18:37 by sanan             #+#    #+#             */
+/*   Updated: 2022/11/09 10:21:25 by sanan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_bzero(void *s, size_t n)
 {
-	t_args		args;
-	t_philos	*philos;
+	size_t		idx;
+	char		*start;
 
-	args_init(&args, ac, av);
-	philos_init(&args, philos);
+	if (n == 0)
+		return ;
+	idx = 0;
+	start = s;
+	while (idx < n)
+	{
+		start[idx] = 0;
+		idx++;
+	}
 }

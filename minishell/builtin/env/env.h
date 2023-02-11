@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_msg.c                                          :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sanan <sanan@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 11:37:48 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/10 12:02:02 by hyungseok        ###   ########.fr       */
+/*   Created: 2023/02/04 20:23:26 by sanan             #+#    #+#             */
+/*   Updated: 2023/02/06 14:34:29 by sanan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#ifndef ENV_H
+# define ENV_H
 
-void	err_msg(char *str)
-{
-	int	i;
+# include "../export/export.h"
 
-	i = -1;
-	while (str[++i])
-		write(2, &str[i], 1);
-	write(2, "\n", 1);
-	exit(1);
-}
+void	builtin_env(char **cmd, t_list *envl);
+
+#endif

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 22:49:07 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/10 21:03:14 by hyungseok        ###   ########.fr       */
+/*   Created: 2023/02/11 13:22:17 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/02/11 13:22:37 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 static int	cnt_num(const char *str, int i)
 {
