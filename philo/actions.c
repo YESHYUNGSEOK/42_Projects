@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:58:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/11 18:06:21 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/11 18:55:32 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	start_eating(t_table *table, int cur, int next)
 	}
 	if (table->philos[cur].fork_cnt == READY_TO_EAT)
 	{
+		printf("philo_%d is eating.\n", cur + 1);
 		pthread_mutex_unlock(&table->forks[cur].fork);
 		pthread_mutex_unlock(&table->forks[next].fork);
-		printf("philo_%d is eating.\n", cur + 1);
 		table->philos[cur].status = EATING;
 		table->forks[cur].status = UNUSED;
 		table->forks[next].status = UNUSED;
