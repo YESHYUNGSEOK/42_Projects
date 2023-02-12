@@ -6,41 +6,40 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:42 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/12 00:04:46 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/12 14:13:43 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_fork_cursor(int	*left, int *right, int i, int num_of_philos)
+void	set_fork_cursor(int	*cur, int *next, int i, int num_of_philos)
 {
 	if (i == num_of_philos - 1)
 	{
-		*left = i;
-		*right = 0;
+		*cur = i;
+		*next = 0;
 	}
 	else
 	{
-		*left = i;
-		*right = i + 1;
+		*cur = i;
+		*next = i + 1;
 	} 
 }
 
 int	philo_is_full(t_philos *philos)
 {
 	if (philos->table->must_eat <= 0)
-		return (1);
+		return (TRUE);
 	else if (philos->must_eat == philos->table->must_eat)
-		return (0);
+		return (FALSE);
 	else
-		return (1);
+		return (TRUE);
 }
 
 void	milliseconds(int nanoseconds)
 {
-	int	i;
+	ssize_t	tmp;
 
-	i = -1;
-	while (++i < 1000)
-		usleep(nanoseconds);
+	tmp = nanoseconds * 1000;
+	usleep(tmp);
 }

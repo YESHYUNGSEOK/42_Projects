@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:22:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/11 13:22:37 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:48:23 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	cnt_num(const char *str, int i)
 	}
 	if (num > INT32_MAX || num < INT32_MIN)
 		return (0);
-	return (num);
+	return ((int)num);
 }
 
 int	ft_atoi(const char *str)

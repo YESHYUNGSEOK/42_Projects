@@ -6,48 +6,78 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:58:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/12 00:04:29 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/12 22:49:38 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	start_eating(t_philos *philos, int left, int right)
+void	start_eating_odd(t_philos *philos, int cur, int next)
 {
-	if (pthread_mutex_lock(&philos->table->forks[left].fork) == 0)
+
+	if (pthread_mutex_lock(&philos->table->forks[next].fork) == 0)
 	{
-		printf("philo_%d has taken a fork.\n", left + 1);
-		philos->fork_cnt++;
+		printf("%d has taken a fork.\n", cur + 1);
+		philos->forks_cnt++;
 	}
-	if (pthread_mutex_lock(&philos->table->forks[right].fork) == 0)
+	if (pthread_mutex_lock(&philos->table->forks[cur].fork) == 0)
 	{
-		printf("philo_%d has taken a fork.\n", left + 1);
-		philos->fork_cnt++;
+		printf("%d has taken a fork.\n", cur + 1);
+		philos->forks_cnt++;
 	}
-	if (philos->fork_cnt == READY_TO_EAT)
+	if (philos->forks_cnt == 2)
 	{
-		printf("philo_%d is eating.\n", left + 1);
-		pthread_mutex_unlock(&philos->table->forks[left].fork);
-		pthread_mutex_unlock(&philos->table->forks[right].fork);
-		philos->status = EATING;
-		philos->must_eat++;
-		philos->fork_cnt = 0;
+		printf("%d is eating.\n", cur + 1);
 		milliseconds(philos->table->time_to_eat);
+		philos->must_eat++;
+		philos->forks_cnt = 0;
+		pthread_mutex_unlock(&philos->table->forks[cur].fork);
+		pthread_mutex_unlock(&philos->table->forks[next].fork);
 	}
 }
 
-void	start_sleeping(t_philos *philos, int left)
+void	start_eating_even(t_philos *philos, int cur, int next)
 {
-	printf("philo_%d is sleeping.\n", left + 1);
-	philos->status = SLEEPING;
+
+	if (pthread_mutex_lock(&philos->table->forks[cur].fork) == 0)
+	{
+		printf("%d has taken a fork.\n", cur + 1);
+		philos->forks_cnt++;
+	}
+	if (pthread_mutex_lock(&philos->table->forks[next].fork) == 0)
+	{
+		printf("%d has taken a fork.\n", cur + 1);
+		philos->forks_cnt++;
+	}
+	if (philos->forks_cnt == 2)
+	{
+		printf("%d is eating.\n", cur + 1);
+		milliseconds(philos->table->time_to_eat);
+		philos->must_eat++;
+		philos->forks_cnt = 0;
+		pthread_mutex_unlock(&philos->table->forks[cur].fork);
+		pthread_mutex_unlock(&philos->table->forks[next].fork);
+	}
+}
+
+void	start_eating(t_philos *philos, int cur, int next)
+{
+	if (philos->cur % 2 == 0)
+		start_eating_even(philos, cur, next);
+	else if (philos->cur % 2 == 1)
+		start_eating_odd(philos, cur, next);
+}
+
+void	start_sleeping(t_philos *philos, int cur)
+{
+	printf("%d is sleeping.\n", cur + 1);
 	milliseconds(philos->table->time_to_sleep);
 }
 
-void	start_thinking(t_philos *philos, int left)
+void	start_thinking(int cur)
 {
-	printf("philo_%d is thinking.\n", left + 1);
-	philos->status = WAITING;
-	usleep(1);
+	printf("%d is thinking.\n", cur + 1);
+	usleep(100);
 }
 
 int	philo_is_alive(void)
