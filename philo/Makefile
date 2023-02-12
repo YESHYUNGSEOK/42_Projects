@@ -6,7 +6,7 @@
 #    By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 21:43:20 by hyungseok         #+#    #+#              #
-#    Updated: 2023/02/12 21:43:24 by hyungseok        ###   ########.fr        #
+#    Updated: 2023/02/13 00:39:33 by hyungseok        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = philo
 
 HEADER = ./
 
-COMPILE_YET = cc -Wall -Wextra -Werror
+COMPILE_YET = cc -Wall -Wextra -Werror -g3 -fsanitize=thread
 
 all : $(NAME)
 	
