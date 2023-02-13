@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:42 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/13 00:50:13 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/13 19:14:47 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,30 @@ int	philo_is_full(t_philos *philos)
 		return (TRUE);
 }
 
+int	philo_is_alive(void)
+{
+	return (1);
+}
+
 void	milliseconds(int nanoseconds)
 {
-	ssize_t	tmp;
+	int	tmp;
 
 	tmp = nanoseconds * 1000;
 	usleep(tmp);
+}
+
+int	show_time(t_philos *philos)
+{
+	gettimeofday(&philos->end, NULL);
+	philos->time += (philos->end.tv_sec - philos->start.tv_sec) * 1000 + (philos->end.tv_usec - philos->start.tv_usec) / 1000;
+	gettimeofday(&philos->start, NULL);
+	return (philos->time);
+}
+
+void	free_all(t_table *table, t_philos *philos)
+{
+	free(table->forks);
+	free(table);
+	free(philos);
 }

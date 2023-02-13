@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:15:53 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/12 22:00:15 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/13 17:29:40 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	leakss(void)
 {
-	system("leaks a.out");
+	system("leaks philo");
 }
 
 int	main(int ac, char **av)
@@ -26,10 +26,11 @@ int	main(int ac, char **av)
 	if (!table || table_init(table, ac, av))
 		return (EXIT_FAILURE);
 	philos = malloc(sizeof(t_philos) * table->num_of_philos);
-	if (!philos || philos_init(table, philos))
+	if (!philos || philos_init(table, philos) || forks_init(table))
 		return (EXIT_FAILURE);
 	if (congression(table, philos))
 		return (EXIT_FAILURE);
+	free_all(table, philos);
 	// atexit(leakss);
 	return (EXIT_SUCCESS);
 }

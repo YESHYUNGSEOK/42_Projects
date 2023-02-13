@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   congression.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:05:56 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/13 00:55:35 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/13 19:29:53 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	*callup(void *data)
 	philos = (t_philos *)data;
 	if (philos->cur % 2 == 1)
 		usleep(100);
+	gettimeofday(&philos->start, NULL);
 	while (philo_is_alive() && philo_is_full(philos))
 	{
 		if (philos->status == WAITING)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:22:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/12 21:48:23 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/13 16:15:30 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static int	cnt_num(const char *str, int i)
 	ssize_t	num;
 
 	num = 0;
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	while (str[i])
 	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (0);
 		num = num * 10 + (str[i] - '0');
 		i++;
 	}

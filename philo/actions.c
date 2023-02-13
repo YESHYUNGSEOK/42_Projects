@@ -3,88 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:58:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/13 00:38:43 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/13 19:28:32 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	start_eating_odd(t_philos *philos, int cur, int next)
+void	meal(t_philos *philos, int cur, int next)
 {
+	printf("%d %d is eating\n", show_time(philos), cur + 1);
+	milliseconds(philos->table->time_to_eat);
+	philos->must_eat++;
+	philos->table->forks[cur].status = IDLE;
+	philos->table->forks[next].status = IDLE;
+	philos->status = EATING;
+}
 
-	if (pthread_mutex_lock(&philos->table->forks[next].fork) == 0)
+void	first_fork(t_philos *philos, int cur)
+{
+	while (FORK_BEING_USED)
 	{
-		printf("%d has taken a fork.\n", cur + 1);
-		philos->forks_cnt++;
-	}
-	if (pthread_mutex_lock(&philos->table->forks[cur].fork) == 0)
-	{
-		printf("%d has taken a fork.\n", cur + 1);
-		philos->forks_cnt++;
-	}
-	if (philos->forks_cnt == 2)
-	{
-		printf("%d is eating.\n", cur + 1);
-		milliseconds(philos->table->time_to_eat);
-		philos->must_eat++;
-		philos->forks_cnt = 0;
-		philos->status = EATING;
-		pthread_mutex_unlock(&philos->table->forks[cur].fork);
-		pthread_mutex_unlock(&philos->table->forks[next].fork);
+		pthread_mutex_lock(&philos->table->forks[cur].fork);
+		if (philos->table->forks[cur].status == IDLE)
+		{
+			printf("%d %d has taken a fork\n", show_time(philos), cur + 1);
+			philos->table->forks[cur].status = USING;
+			pthread_mutex_unlock(&philos->table->forks[cur].fork);
+			break ;
+		}
+		else
+			pthread_mutex_unlock(&philos->table->forks[cur].fork);
 	}
 }
 
-void	start_eating_even(t_philos *philos, int cur, int next)
+void	second_fork(t_philos *philos, int cur, int next)
 {
-
-	if (pthread_mutex_lock(&philos->table->forks[cur].fork) == 0)
+	while (FORK_BEING_USED)
 	{
-		printf("%d has taken a fork.\n", cur + 1);
-		philos->forks_cnt++;
-	}
-	if (pthread_mutex_lock(&philos->table->forks[next].fork) == 0)
-	{
-		printf("%d has taken a fork.\n", cur + 1);
-		philos->forks_cnt++;
-	}
-	if (philos->forks_cnt == 2)
-	{
-		printf("%d is eating.\n", cur + 1);
-		milliseconds(philos->table->time_to_eat);
-		philos->must_eat++;
-		philos->forks_cnt = 0;
-		philos->status = EATING;
-		pthread_mutex_unlock(&philos->table->forks[cur].fork);
-		pthread_mutex_unlock(&philos->table->forks[next].fork);
+		pthread_mutex_lock(&philos->table->forks[next].fork);
+		if (philos->table->forks[next].status == IDLE)
+		{
+			printf("%d %d has taken a fork\n", show_time(philos), cur + 1);
+			philos->table->forks[next].status = USING;
+			pthread_mutex_unlock(&philos->table->forks[next].fork);
+			break ;
+		}
+		else
+			pthread_mutex_unlock(&philos->table->forks[next].fork);
 	}
 }
 
 void	start_eating(t_philos *philos, int cur, int next)
 {
-	if (philos->cur % 2 == 0)
-		start_eating_even(philos, cur, next);
-	else if (philos->cur % 2 == 1)
-		start_eating_odd(philos, cur, next);
+	first_fork(philos, cur);
+	second_fork(philos, cur, next);
+	meal(philos, cur, next);
 }
 
 void	start_sleeping(t_philos *philos, int cur)
 {
-	printf("%d is sleeping.\n", cur + 1);
+	printf("%d %d is sleeping\n", show_time(philos), cur + 1);
 	milliseconds(philos->table->time_to_sleep);
 	philos->status = SLEEPING;
 }
 
 void	start_thinking(t_philos *philos, int cur)
 {
-	printf("%d is thinking.\n", cur + 1);
+	printf("%d %d is thinking\n", show_time(philos), cur + 1);
 	usleep(100);
 	philos->status = WAITING;
-}
-
-int	philo_is_alive(void)
-{
-	return (1);
 }

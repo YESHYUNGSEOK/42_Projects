@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:01:15 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/13 00:36:34 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/13 19:12:38 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	forks_init(t_table *table)
 	{
 		if (pthread_mutex_init(&table->forks[i].fork, NULL))
 			return (EXIT_FAILURE);
+		table->forks[i].status = IDLE;
 		i++;
-	}	
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -48,8 +49,6 @@ int	table_init(t_table *table, int ac, char **av)
 	}
 	else
 		table->must_eat = -1;
-	if (forks_init(table))
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -61,7 +60,7 @@ int	philos_init(t_table *table, t_philos *philos)
 	{
 		set_fork_cursor(&philos[i].cur, &philos[i].next, i, table->num_of_philos);
 		philos[i].status = WAITING;
-		philos[i].forks_cnt = 0;
+		philos[i].time = 0;
 		if (table->must_eat > 0)
 			philos[i].must_eat = 0;
 		else
