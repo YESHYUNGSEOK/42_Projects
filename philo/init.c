@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:01:15 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/13 19:12:38 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:13:00 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	philos_init(t_table *table, t_philos *philos)
 	{
 		set_fork_cursor(&philos[i].cur, &philos[i].next, i, table->num_of_philos);
 		philos[i].status = WAITING;
-		philos[i].time = 0;
 		if (table->must_eat > 0)
 			philos[i].must_eat = 0;
 		else

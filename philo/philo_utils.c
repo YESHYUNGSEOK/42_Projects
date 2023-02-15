@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:42 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/13 19:14:47 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:35:51 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,41 @@ int	philo_is_full(t_philos *philos)
 {
 	if (philos->table->must_eat <= 0)
 		return (TRUE);
-	else if (philos->must_eat == philos->table->must_eat)
+	else if (philos->status == FULL)
 		return (FALSE);
 	else
 		return (TRUE);
 }
 
-int	philo_is_alive(void)
+int	philo_is_alive(t_philos *philos)
 {
+	if (philos->status == DEAD)
+	{
+		printf("%dms\t%d\tdied\n", get_time() - philos->table->start_time, philos->cur + 1);
+		return (0);
+	}
 	return (1);
 }
 
-void	milliseconds(int nanoseconds)
+int	get_time(void)
 {
-	int	tmp;
+	struct timeval	tv;
 
-	tmp = nanoseconds * 1000;
-	usleep(tmp);
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-int	show_time(t_philos *philos)
+int	check_status(t_philos *philos)
 {
-	gettimeofday(&philos->end, NULL);
-	philos->time += (philos->end.tv_sec - philos->start.tv_sec) * 1000 + (philos->end.tv_usec - philos->start.tv_usec) / 1000;
-	gettimeofday(&philos->start, NULL);
-	return (philos->time);
-}
-
-void	free_all(t_table *table, t_philos *philos)
-{
-	free(table->forks);
-	free(table);
-	free(philos);
+	if (philos->must_eat == philos->table->must_eat && philos->table->must_eat > 0)
+	{
+		philos->status = FULL;
+		return (1);
+	}
+	if (get_time() - philos->last_meal > philos->table->time_to_die)
+	{
+		philos->status = DEAD;
+		return (1);
+	}
+	return (0);
 }

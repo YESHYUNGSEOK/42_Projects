@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:22:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/13 16:15:30 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:55:58 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,11 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (cnt_num(str, i) * flag);
+}
+
+void	free_all(t_table *table, t_philos *philos)
+{
+	free(table->forks);
+	free(table);
+	free(philos);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+         #
+#    By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 21:43:20 by hyungseok         #+#    #+#              #
-#    Updated: 2023/02/13 15:47:18 by hyungnoh         ###   ########.fr        #
+#    Updated: 2023/02/15 10:05:09 by hyungseok        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

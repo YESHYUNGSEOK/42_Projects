@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:14:26 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/13 19:28:18 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:13:11 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ enum	e_philo_status
 	WAITING,
 	EATING,
 	SLEEPING,
+	FULL,
+	DEAD,
 };
 
 enum	e_fork_status
@@ -43,9 +45,7 @@ typedef struct s_philos
 	int				next;
 	int				status;
 	int				must_eat;
-	int				time;
-	struct timeval	start;
-	struct timeval	end;
+	int				last_meal;
 	struct s_table	*table;
 }	t_philos;
 
@@ -62,6 +62,7 @@ typedef struct s_table
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
+	int				start_time;
 	struct s_forks	*forks;
 }	t_table;
 
@@ -69,15 +70,15 @@ int		forks_init(t_table *table);
 int		table_init(t_table *table, int ac, char **av);
 int		philos_init(t_table *table, t_philos *philos);
 int		congression(t_table *table, t_philos *philos);
-void	start_eating(t_philos *philos, int cur, int next);
+void	start_eating(t_philos *philos, int cur, int next, int odd_even);
 void	start_sleeping(t_philos *philos, int cur);
 void	start_thinking(t_philos *philos, int cur);
-int		philo_is_alive(void);
+int		philo_is_alive(t_philos *philos);
 //philo_utils
 void	set_fork_cursor(int	*left, int *right, int i, int num_of_philos);
 int		philo_is_full(t_philos *philos);
-void	milliseconds(int nanoseconds);
-int		show_time(t_philos *philos);
+int		check_status(t_philos *philos);
+int		get_time(void);
 void	free_all(t_table *table, t_philos *philos);
 //utils
 int		ft_atoi(const char *str);
