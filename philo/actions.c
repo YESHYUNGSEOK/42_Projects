@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:58:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 12:33:06 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 16:38:30 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	meal(t_philos *philos, int cur, int next)
 	if (check_status(philos))
 		return ;
 	philos->last_meal = get_time();
-	printf("%dms\t%d\tis eating\n", get_time() - philos->table->start_time, cur + 1);
+	pthread_mutex_lock(&philos->table->print);
+	if (philos->table->philo_status != DEAD)
+		printf("%dms\t%d\tis eating\n", get_time() - philos->table->start_time, cur + 1);
+	pthread_mutex_unlock(&philos->table->print);
 	while (get_time() - philos->last_meal < philos->table->time_to_eat)
 		usleep(100);
 	philos->must_eat++;
@@ -35,7 +38,10 @@ void	first_fork(t_philos *philos, int cur)
 		pthread_mutex_lock(&philos->table->forks[cur].fork);
 		if (philos->table->forks[cur].status == IDLE)
 		{
-			printf("%dms\t%d\thas taken a fork\n", get_time() - philos->table->start_time, cur + 1);
+			pthread_mutex_lock(&philos->table->print);
+			if (philos->table->philo_status != DEAD)
+				printf("%dms\t%d\thas taken a fork\n", get_time() - philos->table->start_time, cur + 1);
+			pthread_mutex_unlock(&philos->table->print);
 			philos->table->forks[cur].status = USING;
 			pthread_mutex_unlock(&philos->table->forks[cur].fork);
 			break ;
@@ -54,7 +60,10 @@ void	second_fork(t_philos *philos, int cur, int next)
 		pthread_mutex_lock(&philos->table->forks[next].fork);
 		if (philos->table->forks[next].status == IDLE)
 		{
-			printf("%dms\t%d\thas taken a fork\n", get_time() - philos->table->start_time, cur + 1);
+			pthread_mutex_lock(&philos->table->print);
+			if (philos->table->philo_status != DEAD)
+				printf("%dms\t%d\thas taken a fork\n", get_time() - philos->table->start_time, cur + 1);
+			pthread_mutex_unlock(&philos->table->print);
 			philos->table->forks[next].status = USING;
 			pthread_mutex_unlock(&philos->table->forks[next].fork);
 			break ;
@@ -89,7 +98,10 @@ void	start_sleeping(t_philos *philos, int cur)
 	if (check_status(philos))
 		return ;
 	sleep_start_time = get_time();
-	printf("%dms\t%d\tis sleeping\n", get_time() - philos->table->start_time, cur + 1);
+	pthread_mutex_lock(&philos->table->print);
+	if (philos->table->philo_status != DEAD)
+		printf("%dms\t%d\tis sleeping\n", get_time() - philos->table->start_time, cur + 1);
+	pthread_mutex_unlock(&philos->table->print);
 	while (get_time() - sleep_start_time < philos->table->time_to_sleep)
 		usleep(100);
 	philos->status = SLEEPING;
@@ -99,7 +111,10 @@ void	start_thinking(t_philos *philos, int cur)
 {
 	if (check_status(philos))
 		return ;
-	printf("%dms\t%d\tis thinking\n", get_time() - philos->table->start_time, cur + 1);
+	pthread_mutex_lock(&philos->table->print);
+	if (philos->table->philo_status != DEAD)
+		printf("%dms\t%d\tis thinking\n", get_time() - philos->table->start_time, cur + 1);
+	pthread_mutex_unlock(&philos->table->print);
 	usleep(100);
 	philos->status = WAITING;
 }

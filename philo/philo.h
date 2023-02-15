@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:14:26 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 12:13:11 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 16:33:34 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum	e_philo_status
 	EATING,
 	SLEEPING,
 	FULL,
+	ALIVE,
 	DEAD,
 };
 
@@ -63,6 +64,9 @@ typedef struct s_table
 	int				time_to_sleep;
 	int				must_eat;
 	int				start_time;
+	int				philo_status;
+	pthread_mutex_t	die;
+	pthread_mutex_t print;
 	struct s_forks	*forks;
 }	t_table;
 

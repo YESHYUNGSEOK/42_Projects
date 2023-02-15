@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:01:15 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/15 12:13:00 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 16:34:13 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	forks_init(t_table *table)
 		table->forks[i].status = IDLE;
 		i++;
 	}
+	if (pthread_mutex_init(&table->die, NULL))
+		return (EXIT_FAILURE);
+	if (pthread_mutex_init(&table->print, NULL))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -49,6 +53,7 @@ int	table_init(t_table *table, int ac, char **av)
 	}
 	else
 		table->must_eat = -1;
+	table->philo_status = ALIVE;
 	return (EXIT_SUCCESS);
 }
 
