@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:05:56 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 14:52:31 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 18:31:02 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	*callup(void *data)
 
 	philos = (t_philos *)data;
 	philos->last_meal = philos->table->start_time;
-	if (philos->cur % 2 == 0)
-		usleep(100);
 	while (philo_is_alive(philos) && philo_is_full(philos))
 	{
 		if (philos->status == WAITING)

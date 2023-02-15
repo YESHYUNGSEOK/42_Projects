@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:58:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 17:26:37 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 18:35:20 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	start_eating(t_philos *philos, int cur, int next, int odd_even)
 {
 	while (philos->status == WAITING)
 	{
-		if (odd_even == 0)
+		if (odd_even == 1)
 		{
 			first_fork(philos, cur);
 			second_fork(philos, cur, next);
 		}
-		else if (odd_even == 1)
+		else if (odd_even == 0)
 		{
 			second_fork(philos, cur, next);
 			first_fork(philos, cur);
@@ -56,6 +56,6 @@ void	start_thinking(t_philos *philos, int cur)
 		printf("%dms\t%d\tis thinking\n", \
 		get_time() - philos->table->start_time, cur + 1);
 	pthread_mutex_unlock(&philos->table->print);
-	usleep(100);
 	philos->status = WAITING;
+	usleep(50);
 }
