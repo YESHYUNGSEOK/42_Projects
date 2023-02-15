@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:14:26 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 16:33:34 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 17:27:10 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_table
 	int				start_time;
 	int				philo_status;
 	pthread_mutex_t	die;
-	pthread_mutex_t print;
+	pthread_mutex_t	print;
 	struct s_forks	*forks;
 }	t_table;
 
@@ -75,6 +75,9 @@ int		table_init(t_table *table, int ac, char **av);
 int		philos_init(t_table *table, t_philos *philos);
 int		congression(t_table *table, t_philos *philos);
 void	start_eating(t_philos *philos, int cur, int next, int odd_even);
+void	first_fork(t_philos *philos, int cur);
+void	second_fork(t_philos *philos, int cur, int next);
+void	meal(t_philos *philos, int cur, int next);
 void	start_sleeping(t_philos *philos, int cur);
 void	start_thinking(t_philos *philos, int cur);
 int		philo_is_alive(t_philos *philos);

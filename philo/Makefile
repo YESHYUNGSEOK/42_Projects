@@ -6,7 +6,7 @@
 #    By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 21:43:20 by hyungseok         #+#    #+#              #
-#    Updated: 2023/02/15 10:05:09 by hyungseok        ###   ########.fr        #
+#    Updated: 2023/02/15 17:30:54 by hyungseok        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,14 @@ utils.o \
 philo_utils.o \
 init.o \
 congression.o \
-actions.o
+actions.o \
+eating.o
 
 NAME = philo
 
 HEADER = ./
 
-COMPILE_YET = cc -Wall -Wextra -Werror
+COMPILE_YET = cc -Wall -Wextra -Werror 
 
 all : $(NAME)
 	

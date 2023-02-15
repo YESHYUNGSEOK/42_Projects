@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:15:53 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/15 16:32:32 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 17:29:31 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 {
 	t_table		*table;
 	t_philos	*philos;
-	
+
 	table = malloc(sizeof(t_table));
 	if (!table || table_init(table, ac, av))
 		return (EXIT_FAILURE);

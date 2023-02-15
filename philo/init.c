@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:01:15 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/15 16:34:13 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 17:29:55 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	forks_init(t_table *table)
 {
 	static int	i;
 
-	table->forks = malloc(sizeof(t_forks *) * table->num_of_philos);
+	table->forks = malloc(sizeof(t_forks) * table->num_of_philos);
 	if (!table->forks)
 		return (EXIT_FAILURE);
 	while (i < table->num_of_philos)
@@ -41,7 +41,7 @@ int	table_init(t_table *table, int ac, char **av)
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
-	if (table->num_of_philos <= 0 || table->time_to_die <= 0 
+	if (table->num_of_philos <= 0 || table->time_to_die <= 0
 		|| table->time_to_eat <= 0 || table->time_to_sleep <= 0)
 		return (EXIT_FAILURE);
 	table->must_eat = 0;
@@ -63,7 +63,8 @@ int	philos_init(t_table *table, t_philos *philos)
 
 	while (i < table->num_of_philos)
 	{
-		set_fork_cursor(&philos[i].cur, &philos[i].next, i, table->num_of_philos);
+		set_fork_cursor(&philos[i].cur, &philos[i].next, \
+			i, table->num_of_philos);
 		philos[i].status = WAITING;
 		if (table->must_eat > 0)
 			philos[i].must_eat = 0;

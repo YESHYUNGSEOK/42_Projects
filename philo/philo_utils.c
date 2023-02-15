@@ -6,7 +6,7 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:42 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 14:29:47 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/15 17:24:20 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_fork_cursor(int	*cur, int *next, int i, int num_of_philos)
 	{
 		*cur = i;
 		*next = i + 1;
-	} 
+	}
 }
 
 int	philo_is_full(t_philos *philos)
@@ -47,7 +47,8 @@ int	philo_is_alive(t_philos *philos)
 	if (philos->status == DEAD)
 	{
 		philos->table->philo_status = DEAD;
-		printf("%dms\t%d\tdied\n", get_time() - philos->table->start_time, philos->cur + 1);
+		printf("%dms\t%d\tdied\n", \
+		get_time() - philos->table->start_time, philos->cur + 1);
 		pthread_mutex_unlock(&philos->table->die);
 		return (0);
 	}
@@ -65,7 +66,8 @@ int	get_time(void)
 
 int	check_status(t_philos *philos)
 {
-	if (philos->must_eat == philos->table->must_eat && philos->table->must_eat > 0)
+	if (philos->must_eat == philos->table->must_eat
+		&& philos->table->must_eat > 0)
 	{
 		philos->status = FULL;
 		return (1);
