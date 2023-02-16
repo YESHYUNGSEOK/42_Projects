@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:58:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 18:35:20 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/16 12:19:40 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	start_sleeping(t_philos *philos, int cur)
 
 	if (check_status(philos))
 		return ;
-	sleep_start_time = get_time();
 	pthread_mutex_lock(&philos->table->print);
 	if (philos->table->philo_status != DEAD)
-		printf("%dms\t%d\tis sleeping\n", \
+		printf("%d\t%d\tis sleeping\n", \
 		get_time() - philos->table->start_time, cur + 1);
 	pthread_mutex_unlock(&philos->table->print);
-	while (get_time() - sleep_start_time < philos->table->time_to_sleep)
+	sleep_start_time = get_time();
+	while (get_time() < philos->table->time_to_sleep + sleep_start_time)
 		usleep(100);
 	philos->status = SLEEPING;
 }
@@ -53,9 +53,9 @@ void	start_thinking(t_philos *philos, int cur)
 		return ;
 	pthread_mutex_lock(&philos->table->print);
 	if (philos->table->philo_status != DEAD)
-		printf("%dms\t%d\tis thinking\n", \
+		printf("%d\t%d\tis thinking\n", \
 		get_time() - philos->table->start_time, cur + 1);
 	pthread_mutex_unlock(&philos->table->print);
 	philos->status = WAITING;
-	usleep(50);
+	usleep(100);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:22:17 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 17:23:50 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/16 13:39:34 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	flag = 1;
 	while (str[i] && (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v'))
+			|| str[i] == '\r' || str[i] == ' ' || str[i] == '\v'))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{	

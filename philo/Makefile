@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+         #
+#    By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/12 21:43:20 by hyungseok         #+#    #+#              #
-#    Updated: 2023/02/15 17:30:54 by hyungseok        ###   ########.fr        #
+#    Created: 2023/02/12 21:43:20 by hyungnoh          #+#    #+#              #
+#    Updated: 2023/02/16 14:05:07 by hyungnoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = philo
 
 HEADER = ./
 
-COMPILE_YET = cc -Wall -Wextra -Werror 
+COMPILE_YET = cc -Wall -Wextra -Werror
 
 all : $(NAME)
 	

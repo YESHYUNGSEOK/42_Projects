@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:42 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 18:11:29 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/16 12:40:14 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	philo_is_alive(t_philos *philos)
 	if (philos->status == DEAD)
 	{
 		philos->table->philo_status = DEAD;
-		printf("%dms\t%d\tdied\n", \
+		printf("%d\t%d\tdied\n", \
 		get_time() - philos->table->start_time, philos->cur + 1);
 		pthread_mutex_unlock(&philos->table->die);
 		return (0);

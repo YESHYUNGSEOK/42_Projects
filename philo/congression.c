@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   congression.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:05:56 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/15 18:31:02 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/16 13:41:22 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	*callup(void *data)
 {
 	t_philos		*philos;
+	int				start;
 
 	philos = (t_philos *)data;
+	start = philos->table->start_time;
 	philos->last_meal = philos->table->start_time;
 	while (philo_is_alive(philos) && philo_is_full(philos))
 	{
@@ -30,23 +32,47 @@ void	*callup(void *data)
 	return (NULL);
 }
 
-int	congression(t_table *table, t_philos *philos)
+int	even_eat_first(t_table *table, t_philos *philos)
 {
-	static int	i;
+	int	i;
 
+	i = 0;
 	table->start_time = get_time();
 	while (i < table->num_of_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, callup, &philos[i]))
+		{
+			while (i)
+			{
+				pthread_join(philos[i].thread, NULL);
+				i -= 2;
+			}
 			return (EXIT_FAILURE);
+		}
 		i += 2;
 	}
 	usleep(500 * table->time_to_eat);
+	return (EXIT_SUCCESS);
+}
+
+int	congression(t_table *table, t_philos *philos)
+{
+	int	i;
+
+	if (even_eat_first(table, philos))
+		return (EXIT_FAILURE);
 	i = 1;
 	while (i < table->num_of_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, callup, &philos[i]))
+		{
+			while (i)
+			{
+				pthread_join(philos[i].thread, NULL);
+				i -= 2;
+			}
 			return (EXIT_FAILURE);
+		}
 		i += 2;
 	}
 	i = 0;
