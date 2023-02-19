@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   congression.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:05:56 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/16 13:41:22 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:22:09 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	*callup(void *data)
 {
 	t_philos		*philos;
-	int				start;
 
 	philos = (t_philos *)data;
-	start = philos->table->start_time;
 	philos->last_meal = philos->table->start_time;
 	while (philo_is_alive(philos) && philo_is_full(philos))
 	{
