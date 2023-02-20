@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_linedup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 16:25:49 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/20 15:07:24 by hyungnoh         ###   ########.fr       */
+/*   Created: 2023/02/20 12:44:32 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/02/20 12:44:46 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-void	leakss(void)
+char	*ft_linedup(char *s1)
 {
-	system("leaks a.out");
-}
+	size_t	i;
+	size_t	len;
+	char	*str;
 
-int	main(int ac, char **av)
-{
-	t_info	info;
-
-	if (ac != 2 || check_arg(av[1]))
-		err_msg("error : improper arguments");
-	info_init(&info, av[1]);
-	return (EXIT_SUCCESS);
+	len = ft_strlen(s1);
+	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len && s1[i] != '\n')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

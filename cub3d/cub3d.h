@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:25:43 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/19 17:45:24 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/20 15:07:21 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,26 @@
 # include <math.h>
 
 # define OPEN_ERROR -1
+# define READ_ELEMENTS 1
+# define READ_MAP 1
+# define FILLED 1
+# define UNFILLED 0
+# define NO_MORE_TO_READ NULL
 
 typedef struct s_map
 {
 	char			*line;
+	struct s_map	*prev;
 	struct s_map	*next;
 }	t_map;
 
 typedef struct s_info
 {
-	char			*n_path;
-	char			*s_path;
-	char			*w_path;
-	char			*e_path;
+	int				fd;
+	char			*north_path;
+	char			*south_path;
+	char			*west_path;
+	char			*east_path;
 	int				f_rgb[3];
 	int				c_rgb[3];
 	struct s_map	*map;
@@ -42,8 +49,16 @@ typedef struct s_info
 int		check_arg(char *filename);
 void	err_msg(char *s);
 void	info_init(t_info *info, char *filename);
-//utils
+int		elements_filled(int elements_cnt[]);
+void	elements_init(t_info *info);
+void	map_init(t_info *info);
+
+//libft
+int		ft_atoi(const char *str);
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
+char	*ft_linedup(char *s1);
+char	**ft_split(char const *s, char c);
 
 //get_next_line
 size_t	ft_strlen(const char *s);

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   info_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 16:25:49 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/20 15:07:24 by hyungnoh         ###   ########.fr       */
+/*   Created: 2023/02/20 10:28:59 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/02/20 15:00:47 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	leakss(void)
+void	info_init(t_info *info, char *filename)
 {
-	system("leaks a.out");
-}
-
-int	main(int ac, char **av)
-{
-	t_info	info;
-
-	if (ac != 2 || check_arg(av[1]))
-		err_msg("error : improper arguments");
-	info_init(&info, av[1]);
-	return (EXIT_SUCCESS);
+	info->fd = open(filename, O_RDONLY);
+	if (info->fd == OPEN_ERROR)
+		err_msg("error : invalid map");
+	elements_init(info);
+	map_init(info);
+	close(info->fd);
 }

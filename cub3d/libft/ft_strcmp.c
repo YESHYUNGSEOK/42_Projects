@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 13:45:08 by sanan             #+#    #+#             */
-/*   Updated: 2023/02/19 16:52:43 by hyungseok        ###   ########.fr       */
+/*   Created: 2023/02/20 12:45:18 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/02/20 12:45:28 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:25:42 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/19 17:54:08 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/02/20 15:05:14 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,24 @@ int	check_arg(char *filename)
 	return (EXIT_SUCCESS);
 }
 
-void	info_init(t_info *info, char *filename)
+int	elements_filled(int elements_cnt[])
 {
-	int	fd;
+	int	i;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == OPEN_ERROR)
-		err_msg("error : invalid map");
+	i = -1;
+	while (++i < 6)
+	{
+		if (elements_cnt[i] != FILLED)
+			return (0);
+	}
+	return (1);
+}
+
+void	free_all(t_info *info)
+{
+	free(info->north_path);
+	free(info->south_path);
+	free(info->west_path);
+	free(info->east_path);
+	free(info->map);
 }
