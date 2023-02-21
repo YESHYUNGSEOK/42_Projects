@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:08:01 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/20 12:42:03 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:13:25 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	check_f_rgb(t_info *info, char *line, int elements_cnt[])
 	i = -1;
 	if (!ft_strncmp("F ", line, 2))
 	{
+		check_comma(line + 2);
 		tmp_rgb = ft_split(line + 2, ',');
 		if (tmp_rgb[3] != NULL)
 			err_msg("error : improper elements");
@@ -78,6 +79,7 @@ void	check_c_rgb(t_info *info, char *line, int elements_cnt[])
 	i = -1;
 	if (!ft_strncmp("C ", line, 2))
 	{
+		check_comma(line + 2);
 		tmp_rgb = ft_split(line + 2, ',');
 		if (tmp_rgb[3] != NULL)
 			err_msg("error : improper elements");
@@ -109,6 +111,7 @@ void	elements_init(t_info *info)
 			free(line);
 			break ;
 		}
+		check_file_order(line);
 		check_path(info, line, elements_cnt);
 		check_f_rgb(info, line, elements_cnt);
 		check_c_rgb(info, line, elements_cnt);

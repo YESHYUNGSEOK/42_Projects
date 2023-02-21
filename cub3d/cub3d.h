@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:25:43 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/20 15:07:21 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/21 20:13:32 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_info
 //cub3d
 int		check_arg(char *filename);
 void	err_msg(char *s);
+void	check_comma(char *str);
+void	check_file_order(char *line);
 void	info_init(t_info *info, char *filename);
 int		elements_filled(int elements_cnt[]);
 void	elements_init(t_info *info);

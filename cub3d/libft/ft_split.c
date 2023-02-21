@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 23:34:17 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/20 12:46:26 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/21 19:52:34 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static size_t	count_s(const char *s, char c)
 			cnt++;
 		}
 	}
+	if (cnt < 3)
+		err_msg("error : improper elements");
 	return (cnt);
 }
 
