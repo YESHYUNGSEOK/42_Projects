@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:05:41 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/20 14:52:41 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:41:00 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,28 @@ int	check_validity(char *line)
 	return (0);
 }
 
+void	check_empty_line(t_map *map)
+{
+	t_map	*tmp;
+	int		i;
+	int		flag;
+
+	tmp = map;
+	while (tmp)
+	{
+		flag = 0;
+		i = -1;
+		while (tmp->line[++i])
+		{
+			if (tmp->line[i] != ' ')
+				flag++;
+		}
+		if (flag == 0)
+			err_msg("error : invalid map");
+		tmp = tmp->next;
+	}
+}
+
 void	map_start(t_info *info)
 {
 	char	*line;
@@ -32,6 +54,8 @@ void	map_start(t_info *info)
 	while (READ_MAP)
 	{
 		line = get_next_line(info->fd);
+		if (line == NO_MORE_TO_READ)
+			err_msg("error : invalid map");
 		if (check_validity(line))
 		{
 			info->map = malloc(sizeof(t_map));
@@ -72,4 +96,5 @@ void	map_init(t_info *info)
 		next = next->next;
 		free(line);
 	}
+	check_empty_line(info->map);
 }
