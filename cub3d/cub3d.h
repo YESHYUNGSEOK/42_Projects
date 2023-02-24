@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:25:43 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/22 18:54:51 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:02:16 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		check_arg(char *filename);
 void	err_msg(char *s);
 void	check_comma(char *str);
 void	check_file_order(char *line);
+int		get_last(t_map *map);
 void	check_wall(t_map *map);
 void	info_init(t_info *info, char *filename);
 int		elements_filled(int elements_cnt[]);

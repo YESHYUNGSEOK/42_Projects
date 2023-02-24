@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:25:42 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/21 20:19:09 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:02:35 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,21 @@ void	check_file_order(char *line)
 		if (line[i] != ' ' && line[i] != '\n')
 			err_msg("error : improper elements");
 	}
+}
+
+int	get_last(t_map *map)
+{
+	t_map	*tmp;
+	int		i;
+
+	tmp = map;
+	i = -1;
+	while (tmp)
+	{
+		++i;
+		tmp = tmp->next;
+	}
+	if (i < 2)
+		err_msg("error : invalid map");
+	return (i);
 }

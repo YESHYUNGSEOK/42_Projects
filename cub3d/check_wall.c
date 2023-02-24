@@ -6,28 +6,11 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:47:58 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/22 19:47:50 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:40:21 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_last(t_map *map)
-{
-	t_map	*tmp;
-	int		i;
-
-	tmp = map;
-	i = -1;
-	while (tmp)
-	{
-		++i;
-		tmp = tmp->next;
-	}
-	if (i < 2)
-		err_msg("error : invalid map");
-	return (i);
-}
 
 void	check_side(t_map *map, int i, int j, int last)
 {
@@ -60,6 +43,7 @@ void	check_closed(t_map *map, int i, int j, int last)
 {
 	t_map	*tmp;
 	int		len;
+	int		next_len;
 
 	tmp = map;
 	while (tmp)
@@ -67,19 +51,87 @@ void	check_closed(t_map *map, int i, int j, int last)
 		len = ft_strlen(tmp->line) - 1;
 		while (++i < len && j != 0 && j != last)
 		{
+			if (tmp->next)
+			{
+				next_len = ft_strlen(tmp->next->line) - 1;
+				if (tmp->line[i] != '1' && tmp->line[i] != ' ' && i > next_len)
+					err_msg("error : wall not closed");
+			}
 			if ((tmp->line[i] != '1' && tmp->line[i] != ' ') 
 				&& (tmp->line[i - 1] == ' ' || tmp->line[i + 1] == ' '
 				|| tmp->prev->line[i] == ' ' || tmp->next->line[i] == ' '))
-				err_msg("error : wall not closed");
-			if (tmp->line[i] != ' ' && tmp->line[i - 1] == ' '
-				&& tmp->line[i + 1] == ' ' && tmp->prev->line[i] == ' '
-				&& tmp->next->line[i] == ' ')
 				err_msg("error : wall not closed");
 		}
 		i = 0;
 		j++;
 		tmp = tmp->next;
 	}
+}
+
+void	recursion(char **board, int x, int y, int last)
+{
+	int	len;
+	int	prev_len;
+	int	next_len;
+
+	if (board[x][y] == '2')
+		return ;
+	board[x][y] = '2';
+	len = ft_strlen(board[x]);
+	if (x != 0)
+		prev_len = ft_strlen(board[x - 1]);
+	if (x != last)
+		next_len = ft_strlen(board[x + 1]);
+	if (x != 0 && y <= prev_len - 1 && board[x - 1][y] != ' ')
+		recursion(board, x - 1, y, last);
+	if (x != last && y <= next_len - 1 && board[x + 1][y] != ' ')
+		recursion(board, x + 1, y, last);
+	if (y != 0 && board[x][y - 1] != ' ')
+		recursion(board, x, y - 1, last);
+	if (board[x][y + 1] != '\0' && board[x][y + 1] != ' ')
+		recursion(board, x, y + 1, last);
+}
+
+void	check_island(t_map *map, int i, int j, int last)
+{
+	t_map	*tmp;
+	char	**board;
+	int		len;
+	int		x;
+	int		y;
+
+	x = 0;
+	y = 0;
+	tmp = map;
+	board = malloc(sizeof(char *) * (last + 2));	
+	while (tmp)
+	{
+		len = ft_strlen(tmp->line);
+		board[i] = malloc(sizeof(char) * (len + 1));
+		while (++j < len)
+		{
+			board[i][j] = tmp->line[j];
+			if (tmp->line[j] == '1')
+			{
+				x = i;
+				y = j;
+			}
+		}
+		board[i][j] = '\0';
+		printf("%s\n", board[i]);
+		j = -1;
+		i++;
+		tmp = tmp->next;
+	}
+	board[i] = NULL;
+	printf("x : %d y : %d\n", x, y);
+	recursion(board, x, y, last);
+	printf("\n\n------------------------------------------------------\n\n");
+	for (int i = 0; i < last + 1; i++)
+	{
+		printf("%s\n", board[i]);
+	}
+	
 }
 
 void	check_wall(t_map *map)
@@ -89,4 +141,5 @@ void	check_wall(t_map *map)
 	last = get_last(map);
 	check_side(map, -1, 0, last);
 	check_closed(map, 0, 0, last);
+	check_island(map, 0, -1, last);
 }
