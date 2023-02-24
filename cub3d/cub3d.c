@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:25:49 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/02/24 12:20:38 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:26:20 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int ac, char **av)
 	// 	printf("%s\n", info.map->line);
 	// 	info.map = info.map->next;
 	// }
+	// atexit(leakss);
 	return (EXIT_SUCCESS);
 }

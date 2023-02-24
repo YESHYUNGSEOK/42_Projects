@@ -6,11 +6,11 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:08:01 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/22 17:24:27 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:36:58 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	elements_cnt_init(int elements_cnt[])
 {

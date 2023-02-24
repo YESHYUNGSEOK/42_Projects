@@ -6,11 +6,11 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:47:58 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/24 15:40:21 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:37:01 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	check_side(t_map *map, int i, int j, int last)
 {
@@ -118,20 +118,27 @@ void	check_island(t_map *map, int i, int j, int last)
 			}
 		}
 		board[i][j] = '\0';
-		printf("%s\n", board[i]);
 		j = -1;
 		i++;
 		tmp = tmp->next;
 	}
 	board[i] = NULL;
-	printf("x : %d y : %d\n", x, y);
 	recursion(board, x, y, last);
-	printf("\n\n------------------------------------------------------\n\n");
-	for (int i = 0; i < last + 1; i++)
+	i = -1;
+	while (++i < last + 1)
 	{
-		printf("%s\n", board[i]);
+		j = -1;
+		len = ft_strlen(board[i]);
+		while (++j < len)
+		{
+			if (board[i][j] != '2' && board[i][j] != ' ')
+				err_msg("error : island exists");
+		}
 	}
-	
+	i = -1;
+	while (++i < last + 1)
+		free(board[i]);
+	free(board);
 }
 
 void	check_wall(t_map *map)

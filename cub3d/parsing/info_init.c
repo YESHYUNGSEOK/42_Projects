@@ -6,11 +6,41 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:28:59 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/22 18:47:26 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:36:48 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
+
+void	check_char(t_map *map)
+{
+	t_map	*tmp;
+	int		i;
+	int		player_cnt;
+
+	tmp = map;
+	player_cnt = 0;
+	while (tmp)
+	{
+		i = -1;
+		while (tmp->line[++i])
+		{
+			if (tmp->line[i] != 'N' && tmp->line[i] != 'S'
+				&& tmp->line[i] != 'E' && tmp->line[i] != 'W'
+				&& tmp->line[i] != '0' && tmp->line[i] != '1'
+				&& tmp->line[i] != ' ')
+				err_msg("error : invalid character");
+			if (tmp->line[i] == 'N' || tmp->line[i] == 'S'
+				|| tmp->line[i] == 'E' || tmp->line[i] == 'W')
+				player_cnt += 1;
+		}
+		tmp = tmp->next;
+	}
+	if (player_cnt > 1)
+		err_msg("error : more than one player");
+	else if (player_cnt == 0)
+		err_msg("error : player must exist");
+}
 
 void	info_init(t_info *info, char *filename)
 {
@@ -19,9 +49,7 @@ void	info_init(t_info *info, char *filename)
 		err_msg("error : invalid map");
 	elements_init(info);
 	map_init(info);
+	check_char(info->map);
 	check_wall(info->map);
-	//위아래 모두 1
-	//좌우 모두 1
-	//그외 상하좌우 모두 0 or 1, 상하좌우 중 공백이 있으면 무조건 1
 	close(info->fd);
 }

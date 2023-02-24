@@ -6,11 +6,11 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:05:41 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/22 17:41:00 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:36:54 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	check_validity(char *line)
 {
