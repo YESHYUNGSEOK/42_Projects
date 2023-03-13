@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 22:49:07 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/02/20 12:46:21 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:45:03 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_atoi(const char *str)
 	int	i;
 	int	flag;
 
+	if (str[0] == 10)
+		return (-1);
 	i = 0;
 	flag = 1;
 	while (str[i] && (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
