@@ -6,15 +6,13 @@
 #    By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 11:18:13 by hyungnoh          #+#    #+#              #
-#    Updated: 2023/12/12 10:29:17 by hyungseok        ###   ########.fr        #
+#    Updated: 2023/12/13 11:01:59 by hyungseok        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OBJECT = Contact.o PhoneBook.o main.o
+OBJECT = Harl.o main.o
 
-NAME = phonebook
-
-HEADER = ./
+NAME = harl
 
 COMPILE = c++ -Wall -Werror -Wextra -std=c++98
 
@@ -24,7 +22,7 @@ $(NAME) : $(OBJECT)
 	$(COMPILE) -o $(NAME) $(OBJECT)
 
 %.o : %.cpp
-	$(COMPILE) -I $(HEADER) -c $^ -o $@
+	$(COMPILE) -c $^ -o $@
 
 clean :
 	rm -f $(OBJECT)

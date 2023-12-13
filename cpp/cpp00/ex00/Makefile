@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+         #
+#    By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 11:18:13 by hyungnoh          #+#    #+#              #
-#    Updated: 2023/03/13 12:32:52 by hyungnoh         ###   ########.fr        #
+#    Updated: 2023/12/12 13:11:43 by hyungseok        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,15 @@ OBJECT = megaphone.o
 
 NAME = megaphone
 
-COMPILE_YET = c++ -Wall -Wextra -Werror
+COMPILE = c++ -Wall -Werror -Wextra -std=c++98
 
 all : $(NAME)
 	
 $(NAME) : $(OBJECT)
-	$(COMPILE_YET) -o $(NAME) $(OBJECT)
+	$(COMPILE) -o $(NAME) $(OBJECT)
 
 %.o : %.cpp
-	$(COMPILE_YET) -c $^ -o $@
+	$(COMPILE) -c $^ -o $@
 
 clean :
 	rm -f $(OBJECT)
