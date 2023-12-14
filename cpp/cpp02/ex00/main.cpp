@@ -5,21 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 11:02:23 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/12/13 14:47:28 by hyungseok        ###   ########.fr       */
+/*   Created: 2023/12/13 15:35:47 by hyungseok         #+#    #+#             */
+/*   Updated: 2023/12/14 11:26:37 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Harl.hpp"
+# include <iostream>
+# include "Fixed.hpp"
 
-int main()
+int main( void )
 {
-	Harl harl;
+	Fixed a;
+	Fixed b(a);
+	Fixed c;
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");	
-	
+	c = b;
+
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+
 	return (0);
 }
