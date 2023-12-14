@@ -6,13 +6,13 @@
 #    By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 11:18:13 by hyungnoh          #+#    #+#              #
-#    Updated: 2023/12/14 12:10:01 by hyungnoh         ###   ########.fr        #
+#    Updated: 2023/12/14 14:46:41 by hyungnoh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OBJECT = Fixed.o main.o
+OBJECT = ClapTrap.o FragTrap.o main.o
 
-NAME = fixed
+NAME = FragTrap
 
 COMPILE = c++ -Wall -Werror -Wextra -std=c++98
 
