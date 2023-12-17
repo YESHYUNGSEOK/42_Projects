@@ -6,16 +6,15 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:45:17 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/12/12 14:00:50 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/12/16 20:29:36 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <iostream>
 # include "Zombie.hpp"
 
-Zombie::Zombie(std::string name)
+Zombie::Zombie(std::string name) : name(name)
 {
-	this->name = name;
+	std::cout << this->name << " is born." << std::endl;
 }
 
 Zombie::~Zombie()

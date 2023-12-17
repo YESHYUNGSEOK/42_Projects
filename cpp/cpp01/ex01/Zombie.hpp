@@ -6,14 +6,14 @@
 /*   By: hyungseok <hyungseok@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:50:37 by hyungseok         #+#    #+#             */
-/*   Updated: 2023/12/12 14:13:35 by hyungseok        ###   ########.fr       */
+/*   Updated: 2023/12/16 20:17:26 by hyungseok        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP
 
-# include <string>
+# include <sstream>
 
 class Zombie
 {
