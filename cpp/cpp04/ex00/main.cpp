@@ -5,24 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 13:10:05 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/18 15:48:10 by hyungnoh         ###   ########.fr       */
+/*   Created: 2023/12/18 13:32:08 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/12/18 18:41:45 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ClapTrap.hpp"
+# include <iostream>
+# include "Animal.hpp"
+# include "Dog.hpp"
+# include "Cat.hpp"
+# include "WrongAnimal.hpp"
+# include "WrongCat.hpp"
 
 int main()
 {
-	ClapTrap a("A");
-	ClapTrap b("B");
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
 	
-	a.attack("B");
-	b.takeDamage(3);
-	b.beRepaired(3);
-	b.attack("A");
-	a.takeDamage(10);
-	a.beRepaired(10);
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+	
+	i->makeSound();
+	j->makeSound();
+	meta->makeSound();
+
+	delete i;
+	delete j;
+	delete meta;
+
+
+	const WrongAnimal* k = new WrongAnimal();
+	const WrongAnimal* z = new WrongCat();
+
+	k->makeSound();
+	z->makeSound();
+
+	delete k;
+	delete z;
 	
 	return (0);
 }

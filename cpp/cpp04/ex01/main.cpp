@@ -5,24 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 13:10:05 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/18 15:48:10 by hyungnoh         ###   ########.fr       */
+/*   Created: 2023/12/18 13:32:08 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/12/18 18:43:25 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ClapTrap.hpp"
+# include <iostream>
+# include "Dog.hpp"
+# include "Cat.hpp"
 
-int main()
+int main(void)
 {
-	ClapTrap a("A");
-	ClapTrap b("B");
+	Dog *dog = new Dog();
+	Cat *cat = new Cat();
+	std::string str;
 	
-	a.attack("B");
-	b.takeDamage(3);
-	b.beRepaired(3);
-	b.attack("A");
-	a.takeDamage(10);
-	a.beRepaired(10);
+	for (int i = 0; i < 10; i++)
+		dog->getBrain().setIdea(i, "Dog's idea");
+	for (int i = 0; i < 10; i++)
+		cat->getBrain().setIdea(i, "Cat's idea");
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2 == 0)
+			str = cat->getBrain().getIdeas(i);
+		else
+			str = dog->getBrain().getIdeas(i);
+		std::cout << str << std::endl;
+	}
+
+	delete dog;
+	delete cat;
 	
-	return (0);
+	return(0);
 }

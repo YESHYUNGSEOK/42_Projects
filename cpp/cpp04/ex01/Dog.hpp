@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sed.hpp                                            :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 14:48:19 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/17 14:48:20 by hyungnoh         ###   ########.fr       */
+/*   Created: 2023/12/18 14:40:09 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/12/18 18:31:56 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SED_HPP
-# define SED_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
 # include <iostream>
-# include <fstream>
-# include <string>
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-class Sed
+class Dog : public Animal
 {
-    private:
-        std::string s1;
-        std::string s2;
-        std::ifstream ifs;
-        std::ofstream ofs;
-    public:
-        Sed(std::string input, std::string s1, std::string s2);
-        ~Sed();
-        void replace();
-        void replaceStr(std::string *replaced);
+	private:
+		Brain *brain;
+	public:
+		Dog();
+		~Dog();
+		Dog(const Dog &source);
+		Dog &operator=(const Dog &source);
+		void makeSound() const;
+		Brain & getBrain(void) const;
 };
 
 #endif

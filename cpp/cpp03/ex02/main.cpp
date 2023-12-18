@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:10:05 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/14 14:51:55 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:17:00 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 int main()
 {
-    FragTrap jusohnTrap("jusohn");
-    FragTrap copycat(jusohnTrap);
-    FragTrap tmpTrap;
-    tmpTrap = copycat;
-
-    jusohnTrap.attack("song_pd");
-    jusohnTrap.takeDamage(10);
+    FragTrap A("A");
+    FragTrap B("B");
     
-    jusohnTrap.beRepaired(10);
+    A.attack("B");
+    B.takeDamage(30);
+    B.beRepaired(30);
+    A.highFivesGuys();
 
-    jusohnTrap.highFivesGuys();
-    copycat.highFivesGuys();
-    tmpTrap.highFivesGuys();
     return (0);
 }

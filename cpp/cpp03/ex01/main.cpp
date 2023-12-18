@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:10:05 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/14 14:40:14 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:18:21 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,19 @@
 
 int main()
 {
-    ScavTrap a("jusohn");
-    ScavTrap b("soul");
-    ScavTrap c("song_pd");
+    ScavTrap a("A");
+    ScavTrap b("B");
 
-    a.attack("soul");
-    b.takeDamage(20);
-
-    b.attack("jusohn");
-    a.takeDamage(20);
-
-    a.beRepaired(50);
-    
-    a.attack("soul");
-    b.takeDamage(20);
-    
-    b.attack("jusohn");
-    a.takeDamage(20);
-    
-    a.attack("soul");
-    b.takeDamage(20);
-    
-    b.attack("jusohn");
-    a.takeDamage(20);
-    
-    a.attack("soul");
-    b.takeDamage(20);
-    
-    b.attack("jusohn");
-    a.takeDamage(20);
-    
-    a.attack("soul");
-    b.takeDamage(20);
-    
-    b.attack("jusohn");
-    a.takeDamage(20);
-    
-    a.attack("soul");
-    b.takeDamage(20);
-    
-    b.attack("jusohn");
-    a.takeDamage(20);
-    
-    a.attack("soul");
-    b.takeDamage(20);
-    
-    b.attack("jusohn");
-    a.takeDamage(20);
-    
-    a.beRepaired(50);
-    
-    a.attack("soul");
+    a.attack("B");
     b.takeDamage(20);
 
-    b.attack("jusohn");
+    b.attack("A");
     a.takeDamage(20);
+
+    a.beRepaired(20);
     
     a.guardGate();
     b.guardGate();
-    c.guardGate();
 	
     return (0);
 }

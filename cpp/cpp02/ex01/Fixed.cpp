@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/18 11:22:16 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/12/18 11:22:17 by hyungnoh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 Fixed::Fixed(void) : fixedPointValue(0)
@@ -51,7 +63,7 @@ int Fixed::toInt(void) const
 
 Fixed & Fixed::operator = (const Fixed &val)
 {
-    std::cout << "Assignation operator called" << std::endl;
+    std::cout << "Copy assignment operator called" << std::endl;
     if (this == &val)
         return (*this);
     this->fixedPointValue = val.getRawBits();

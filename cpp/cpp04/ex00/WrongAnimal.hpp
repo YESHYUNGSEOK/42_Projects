@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sed.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 14:48:19 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/17 14:48:20 by hyungnoh         ###   ########.fr       */
+/*   Created: 2023/12/18 13:33:31 by hyungnoh          #+#    #+#             */
+/*   Updated: 2023/12/18 14:44:26 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SED_HPP
-# define SED_HPP
+#ifndef WRONG_ANIMAL_HPP
+# define WRONG_ANIMAL_HPP
 
 # include <iostream>
-# include <fstream>
-# include <string>
 
-class Sed
+class WrongAnimal
 {
-    private:
-        std::string s1;
-        std::string s2;
-        std::ifstream ifs;
-        std::ofstream ofs;
-    public:
-        Sed(std::string input, std::string s1, std::string s2);
-        ~Sed();
-        void replace();
-        void replaceStr(std::string *replaced);
+	protected:
+		std::string type;
+	public:
+		WrongAnimal();
+		WrongAnimal(std::string type);
+		WrongAnimal(const WrongAnimal &source);
+		WrongAnimal &operator=(const WrongAnimal &source);
+		virtual ~WrongAnimal();
+		std::string getType() const;
+		void makeSound() const;
 };
 
 #endif
