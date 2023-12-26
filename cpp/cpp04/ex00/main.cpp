@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 13:32:08 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/18 18:41:45 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:15:59 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int main()
 	std::cout << j->getType() << " " << std::endl;
 	std::cout << i->getType() << " " << std::endl;
 	
+	meta->makeSound();
 	i->makeSound();
 	j->makeSound();
-	meta->makeSound();
 
+	delete meta;
 	delete i;
 	delete j;
-	delete meta;
 
 
 	const WrongAnimal* k = new WrongAnimal();

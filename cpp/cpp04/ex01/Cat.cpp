@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:40:28 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/18 18:32:03 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:20:35 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ Cat::Cat()
 
 Cat::~Cat()
 {
-	std::cout << "[Cat] Destructor called" << std::endl;
 	if (this->brain)
 		delete this->brain;
+	std::cout << "[Cat] Destructor called" << std::endl;
 }
 
 Cat::Cat(const Cat &source)

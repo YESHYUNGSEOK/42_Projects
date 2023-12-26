@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 09:03:01 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/21 11:07:06 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:23:21 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 #include "Cure.hpp"
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
-
-void showLeaks()
-{
-    system("leaks ex03");
-}
 
 int main()
 {
@@ -44,6 +39,5 @@ int main()
     delete me;
     delete src;
 
-    atexit(showLeaks);
     return 0;
 }

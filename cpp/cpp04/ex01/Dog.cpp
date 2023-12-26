@@ -6,7 +6,7 @@
 /*   By: hyungnoh <hyungnoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:40:28 by hyungnoh          #+#    #+#             */
-/*   Updated: 2023/12/18 18:31:46 by hyungnoh         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:20:53 by hyungnoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ Dog::Dog()
 
 Dog::~Dog()
 {
-	std::cout << "[Dog] Destructor called" << std::endl;
 	if (this->brain)
 		delete this->brain;
+	std::cout << "[Dog] Destructor called" << std::endl;
 }
 
 Dog::Dog(const Dog &source)
