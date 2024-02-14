@@ -1,19 +1,15 @@
-FROM	debian:buster
+FROM debian:buster
 
-RUN		apt-get update -y && \
-		apt-get install -y mariadb-client php7.3-fpm php-mysql tar wget sudo
+RUN apt-get update
+RUN apt-get -y install php7.3 php-mysqli php-fpm wget sendmail
 
+EXPOSE 9000
 
-COPY	./tools/setup_wordpress.sh /tmp/setup_wordpress.sh
-COPY	./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
+COPY ./tools /var/www/
 
-RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/bin/wp
+RUN chmod +x /var/www/wordpress_start.sh
 
-WORKDIR	/var/www/html/wordpress
-RUN	mkdir -p /run/php
+ENTRYPOINT [ "/var/www/wordpress_start.sh" ]
 
-EXPOSE	9000
-
-ENTRYPOINT ["sh", "/tmp/setup_wordpress.sh"]
+CMD ["/usr/sbin/php-fpm7.3", "--nodaemonize"]

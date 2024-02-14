@@ -1,63 +1,60 @@
 version: "3.5"
 
-services:
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx/
-    image: nginx
-    depends_on:
-      - wordpress
-    restart: unless-stopped
-    ports:
-      - "443:443"
-    networks:
-      - inception_network
-    volumes:
-      - wp_volume:/var/www/
-
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress/
-    image: wordpress
-    depends_on:
-      - mariadb
-    restart: unless-stopped
-    networks:
-      - inception_network
-    env_file:
-      - .env
-    volumes:
-      - wp_volume:/var/www/
-
-  mariadb:
-    container_name: mariadb
-    build: ./requirements/mariadb/
-    image: mariadb
-    restart: unless-stopped
-    networks:
-      - inception_network
-    env_file:
-      - .env
-    volumes:
-      - db_volume:/var/lib/mysql/
-
 networks:
-  inception_network:
+  app-network:
+    name: app-network
     driver: bridge
 
 volumes:
-  db_volume:
+  wp:
     driver: local
-    name: db_volume
+    name: wp
     driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/hyungnoh/data/database"
+      type: none
+      o: bind
+      device: ~/data/wordpress
+  db:
+    driver: local
+    name: db
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/mariadb
 
-  wp_volume:
-    driver: local
-    name: wp_volume
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/hyungnoh/data/wordpress"
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - app-network
+    restart: unless-stopped

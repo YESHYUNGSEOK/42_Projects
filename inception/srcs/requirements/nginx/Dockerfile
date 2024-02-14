@@ -1,17 +1,15 @@
 FROM debian:buster
 
-RUN apt -y update && apt install -y nginx && apt install openssl -y
+RUN apt-get update
+RUN apt-get install -y nginx openssl
 
-RUN mkdir /etc/nginx/ssl
-RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-       -out /etc/nginx/ssl/hyungnoh.crt \
-       -keyout /etc/nginx/ssl/hyungnoh.key \
-       -subj "/C=KR/ST=Seoul/L=Seoul/O=42 School/OU=hyungnoh/CN=hyungnoh/"
+EXPOSE 443
 
-COPY ./conf/nginx.conf /etc/nginx/conf.d
+COPY ./conf/default /etc/nginx/sites-enabled/default
+COPY ./tools/nginx_start.sh /var/www
 
-RUN mkdir -p /run/nginx
+RUN chmod +x /var/www/nginx_start.sh
 
-EXPOSE	443
+ENTRYPOINT [ "var/www/nginx_start.sh" ]
 
 CMD ["nginx", "-g", "daemon off;"]
